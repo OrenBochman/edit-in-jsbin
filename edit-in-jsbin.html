@@ -3,7 +3,7 @@
     <iron-ajax auto url="{{url}}" handle-as="text" last-response="{{got}}"></iron-ajax>
     <form target="newbin" action="http://jsbin.com/" method="post">
       <input type="hidden" name="html" value="{{go}}" />
-      <input type="image" alt="Edit in JSbin" src="/images/jsbin.svg" />
+      <input type="image" alt="Edit in JSbin" src="jsbin.svg" />
     </form>
   </template>
 </dom-module>
@@ -12,12 +12,13 @@
     Polymer({
       is: 'edit-in-jsbin',
       properties: {
-        go:{ 
-            computed:"addBase(got,url)"
+        go:{
+          type:String,
+          computed:"addBase(got,url)"
         },
         url:String
       },
-      addBase: function(got,url) {
+      _addBase: function(got,url) {
         base = '<base href="' + url.match(/(.*)\//)[0] + '">';     
         return got.replace('<head>','<head>'+ base);
       }
